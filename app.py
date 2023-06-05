@@ -11,13 +11,32 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
 
+
+
+def add_background():
+    st.markdown(
+          f"""
+          <style>
+          .stApp {{
+              background-image: url("https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+              background-attachment: fixed;
+              background-size: cover;
+          }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
 def main():
-    #URL Title and Logo
+    # URL Title and Logo
     urllib.request.urlretrieve('https://ontariotechu.ca/favicon.ico', "img.png")
     img = Image.open("img.png")
     st.set_page_config(page_title="DocScanner", page_icon=img)
     
-    #Hiding Steamlit Logo and Settings
+    # Background Image
+    add_background() 
+
+    # Hiding Steamlit Logo and Settings
     hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -26,28 +45,23 @@ def main():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
     
-    #Title
-    st.header("Document Scanner - Personalized ChatBot 📖")
+    # Title
+    st.header("**Document Scanner - Personalized ChatBot** 📖")
     
-    # # upload file
-    # pdf_list = st.file_uploader("Please upload your PDF files", type="pdf", accept_multiple_files=True) 
+    #Example Color Text
+    #st.markdown("This text is <span style='color:#ff6600'>colored pink</span>", unsafe_allow_html=True)
     
-    # # extract the text
-    # if pdf_list:
-    #   for pdf in pdf_list:
-    #     pdf_reader = PdfReader(pdf)
-    #     text = ""
-    #     for page in pdf_reader.pages:
-    #       text += page.extract_text()
+    # Upload File Prompt
+    pdf_list = st.file_uploader("Please upload your PDF files", type="pdf", accept_multiple_files=True) 
     
-    # upload file
-    pdf = st.file_uploader("Please upload your PDF files", type="pdf") 
-    # extract the text
-    if pdf:
-      pdf_reader = PdfReader(pdf)
+    # Extract the text from each PDF
+    if pdf_list:
       text = ""
-      for page in pdf_reader.pages:
-        text += page.extract_text()  
+      for pdf in pdf_list:
+        pdf_reader = PdfReader(pdf)
+        for page in pdf_reader.pages:
+          text += page.extract_text()
+
 
       # split into chunks
       text_splitter = CharacterTextSplitter(
@@ -63,8 +77,8 @@ def main():
       embeddings = OpenAIEmbeddings()
       knowledge_base = FAISS.from_texts(chunks, embeddings)
       
-      #show user input 
-      user_question = st.text_input("How can I help you?")
+      #Run OPENAI and Show User Input
+      user_question = st.text_input(":orange[**How can I help you?**]")
       if user_question:
         docs = knowledge_base.similarity_search(user_question)
         
