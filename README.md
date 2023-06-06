@@ -1,63 +1,55 @@
-# Document Scanner with OpenAI ChatGPT
+# DocScanner - Personalized Chatbot
 
-The Document Scanner with OpenAI ChatGPT is a project that utilizes OpenAI's ChatGPT API to analyze and extract details from various types of documents. It provides a convenient way to scan documents and obtain information using natural language queries.
+Welcome to DocScanner, a personalized chatbot program designed to help you with document scanning and answering questions related to the documents you upload. This readme file will guide you through the process of cloning the repository and installing the required dependencies to get started.
 
-## Features
+## Installation
 
-- **Document Scanning:** The project allows you to scan different types of documents, such as PDFs, images, and text files.
-- **Information Extraction:** By using the OpenAI ChatGPT API, the project can extract relevant details from the scanned documents based on natural language queries.
-- **User-friendly Interface:** The project provides an intuitive interface for interacting with the scanner, making it easy for users to input documents and obtain information.
+To use DocScanner, please follow the steps below:
 
-## Setup Instructions
+1. Clone the repository to your local machine using the following command:
 
-Follow the steps below to set up and run the Document Scanner with OpenAI ChatGPT project:
+   ```bash
+   git clone repository_url](https://github.com/ShivamVyas/Doc-Scan-OpenAI.git
+   ```
+2. Update 'env' file with your OpenAI Key
 
-1. **Clone the Repository:** Begin by cloning the project repository to your local machine using the following command:
-    ```
-    git clone https://github.com/your-username/document-scanner.git
-    ```
+3. Install the required dependencies by running the following command:
 
-2. **Install Dependencies:** Navigate to the project directory and install the required dependencies by running the following command:
-    ```
-    cd document-scanner
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. **OpenAI API Configuration:** To access the OpenAI ChatGPT API, you will need an API key. If you don't have one, sign up for an account at [OpenAI](https://openai.com/) and obtain your API key.
+   This command will install all the necessary Python packages specified in the `requirements.txt` file.
 
-    - Create a new file named `.env` in the project directory.
-    - Open the `.env` file and add the following line, replacing `<YOUR_API_KEY>` with your actual API key:
-        ```
-        OPENAI_API_KEY=<YOUR_API_KEY>
-        ```
-
-4. **Start the Application:** Once the setup is complete, you can run the application using the following command:
-    ```
-    python app.py
-    ```
-
-    The application will start, and you will see instructions and prompts in the terminal.
+4. After the installation is complete, you are ready to start using DocScanner!
 
 ## Usage
 
-1. When the application starts, it will prompt you to provide the path to the document you want to scan. Enter the path or filename and press Enter.
+To use DocScanner, follow the steps below:
 
-2. The document will be scanned, and the application will display a confirmation message along with some basic details about the document, such as the file type, size, and number of pages.
+1. Make sure you have the required documents you want to scan and ask questions about. Ensure that the documents are in a compatible format (e.g., PDF, image files, etc.).
 
-3. Next, you can enter a natural language query to obtain specific information from the document. For example, you can ask questions like:
-    - "What is the title of the document?"
-    - "Who is the author of the document?"
-    - "How many pages does the document have?"
+2. Run the DocScanner program using the following command:
 
-    The application will send your query to the OpenAI ChatGPT API and display the extracted information.
+   ```bash
+   streamlit run app.py
+   ```
 
-4. You can continue to enter queries or provide a new document path to scan additional documents.
+3. This command will start the DocScanner application. A browser window will open with the chat interface.
 
-## Contributing
+4. The program will prompt you to upload the document files you want to scan. Provide the paths to the document files when prompted. You can upload multiple files by providing their paths one by one.
 
-Contributions to the Document Scanner with OpenAI ChatGPT project are welcome! If you encounter any issues, have suggestions for improvements, or would like to add new features, please submit a pull request on the project's GitHub repository.
+5. Once the documents are uploaded, the chatbot will be ready to answer your questions about the documents. You can ask questions by typing them into the chat interface.
 
-When contributing, please ensure that you follow the existing coding style and conventions, write appropriate tests, and provide clear documentation.
+6. The chatbot will analyze the documents and provide relevant answers based on the content it has processed. You can continue asking questions or request additional documents to be scanned.
+
+7. To exit the program, simply close the browser window or terminate the program by pressing Ctrl+C in the command line where the program is running.
+
+## Contact
+
+If you have any questions, issues, or suggestions regarding DocScanner, please contact at https://www.linkedin.com/in/shivamvyas.
+
+Thank you for using DocScanner! We hope it proves to be a helpful tool for your document scanning and question-answering needs.
 
 ## License
 
