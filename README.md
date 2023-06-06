@@ -11,14 +11,7 @@ To use DocScanner, please follow the steps below:
    ```bash
    git clone <repository_url>
    ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd DocScanner
-   ```
-
-3. Install the required dependencies by running the following command:
+2. Install the required dependencies by running the following command:
 
    ```bash
    pip install -r requirements.txt
@@ -26,7 +19,7 @@ To use DocScanner, please follow the steps below:
 
    This command will install all the necessary Python packages specified in the `requirements.txt` file.
 
-4. After the installation is complete, you are ready to start using DocScanner!
+3. After the installation is complete, you are ready to start using DocScanner!
 
 ## Usage
 
