@@ -1,4 +1,5 @@
 import streamlit as st
+import docx2txt
 import time
 import random
 import urllib.request
@@ -13,8 +14,8 @@ from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
 
 
-
-def add_background():
+# Adding Background Image and Removing Watermark
+def html_configurations():
     st.markdown(
           f"""
           <style>
@@ -26,7 +27,13 @@ def add_background():
          </style>
          """,
          unsafe_allow_html=True
-     )
+      )
+    hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 def main():
     # URL Title and Logo
@@ -34,76 +41,67 @@ def main():
     img = Image.open("img.png")
     st.set_page_config(page_title="DocScanner", page_icon=img)
     
-    # Background Image
-    add_background() 
+    # Adding Background Image and Removing Watermark
+    html_configurations() 
 
-    #Hiding Steamlit Logo and Settings
-    hide_streamlit_style = """
-            <style>
-            footer {visibility: hidden;}
-            </style>
-            """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-    
     # Title
     st.markdown("<h2>\nDocument Scanner - Personalized ChatBot 📖</h2>", unsafe_allow_html = True)
     
-    #Example Color Text
+    #Change Text Color
     #st.markdown("This text is <span style='color:#ff6600'>colored pink</span>", unsafe_allow_html=True)
     
     # Upload File Prompt
-    pdf_list = st.file_uploader(":orange[**Please upload your PDF files**]", type="pdf", accept_multiple_files=True) 
+    file_list = st.file_uploader("**Please upload your PDF or DOCX files here:**", type=["pdf","docx"], accept_multiple_files=True) 
     
     # Extract the text from each PDF
-    if pdf_list:
+    if file_list:
       text = ""
-      for pdf in pdf_list:
-        pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages:
-          text += page.extract_text()
+      for file in file_list:
+        if ".pdf" in file.name:
+          pdf_reader = PdfReader(file)
+          for page in pdf_reader.pages:
+            text += page.extract_text()
+        elif ".docx" in file.name:
+           text += docx2txt.process(file)
 
-
-      # split into chunks
-      text_splitter = CharacterTextSplitter(
-        separator="\n",
-        chunk_size=1000,
-        chunk_overlap=200,
-        length_function=len
-      )
+      # Split text into chunks
+      text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=200, length_function=len)
       chunks = text_splitter.split_text(text)
       
       load_dotenv()
-      # create embeddings
+      # Using Facebook's library creating embeddings
       embeddings = OpenAIEmbeddings()
       knowledge_base = FAISS.from_texts(chunks, embeddings)
       
-      #Run OPENAI and Show User Input
+      # Run OPENAI and Show User Input
       user_question = st.text_input(":orange[**How can I help you?**]")
       if user_question:
         docs = knowledge_base.similarity_search(user_question)
         
         llm = OpenAI()
         chain = load_qa_chain(llm, chain_type="stuff")
-        progress_bar = st.progress(0);
         
-        #Progress bar not configured with threading (Just for show)
+        
+        # Progress bar not configured with threading (Just for show)
+        progress_bar = st.progress(0);
         r=random.randint(30,60)
         for a in range(r):
           time.sleep(0.1)
           progress_bar.progress(a+1,text=":orange[**Operation in progress ⏳**]")
         
-        #Gather Response with Token Cost
+        # Gather Response with Token Cost
         with get_openai_callback() as cb:
           response = chain.run(input_documents=docs, question=user_question)
 
+        # Progress bar not configured with threading (Just for show)
         for i in range(r,100):
           time.sleep(0.01)
           progress_bar.progress(i+1,text=":orange[**Operation in progress ⏳**]")
         progress_bar.progress(100, text=":orange[**Operation Success ✅**]")
 
-        #Token Cost
+        # Token Cost
         st.write(cb)
-        #AIResponse
+        # AIResponse
         st.write(response)
         
     
