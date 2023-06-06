@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import random
 import urllib.request
 from PIL import Image
 from dotenv import load_dotenv
@@ -85,14 +86,25 @@ def main():
         llm = OpenAI()
         chain = load_qa_chain(llm, chain_type="stuff")
         progress_bar = st.progress(0);
-        with get_openai_callback() as cb:
-            response = chain.run(input_documents=docs, question=user_question)
         
         #Progress bar not configured with threading (Just for show)
-        for process_completed in range(100):
+        r=random.randint(30,60)
+        for a in range(r):
+          time.sleep(0.1)
+          progress_bar.progress(a+1,text="Operation in progress. Please wait.")
+        
+        #Gather Response with Token Cost
+        with get_openai_callback() as cb:
+          response = chain.run(input_documents=docs, question=user_question)
+
+        for i in range(r,100):
           time.sleep(0.01)
-          progress_bar.progress(process_completed+1)
+          progress_bar.progress(i+1,text="Operation in progress. Please wait.")
+        progress_bar.progress(100, text="Operation Success!")
+
+        #Token Cost
         st.write(cb)
+        #AIResponse
         st.write(response)
         
     
