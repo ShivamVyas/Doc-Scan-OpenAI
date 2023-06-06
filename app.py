@@ -93,6 +93,7 @@ def main():
         docs = faiss.similarity_search(user_question)
         
         llm = OpenAI()
+        #Chain type can be changed to map_reduce for large files
         chain = load_qa_chain(llm, chain_type="stuff")
         
         
