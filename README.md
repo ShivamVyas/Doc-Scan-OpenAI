@@ -9,9 +9,11 @@ To use DocScanner, please follow the steps below:
 1. Clone the repository to your local machine using the following command:
 
    ```bash
-   git clone <repository_url>
+   git clone repository_url](https://github.com/ShivamVyas/Doc-Scan-OpenAI.git
    ```
-2. Install the required dependencies by running the following command:
+2. Update 'env' file with your OpenAI Key
+
+3. Install the required dependencies by running the following command:
 
    ```bash
    pip install -r requirements.txt
@@ -19,7 +21,7 @@ To use DocScanner, please follow the steps below:
 
    This command will install all the necessary Python packages specified in the `requirements.txt` file.
 
-3. After the installation is complete, you are ready to start using DocScanner!
+4. After the installation is complete, you are ready to start using DocScanner!
 
 ## Usage
 
