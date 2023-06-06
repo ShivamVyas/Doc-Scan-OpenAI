@@ -17,11 +17,11 @@ To use DocScanner, please follow the steps below:
    Step 1: Open CMD prompt
    Step 2: Run the following in the cmd prompt, replacing <yourkey> with your API key:
    ```bash
-      setx OPENAI_API_KEY “<yourkey>”
+   setx OPENAI_API_KEY “<yourkey>”
    ```
    Step 3: To validate the OpenAI Key on your machine, use the cmd command:
    ```bash
-     echo %OPENAI_API_KEY%
+   echo %OPENAI_API_KEY%
    ```
 4. Install the required dependencies by running the following command:
 
