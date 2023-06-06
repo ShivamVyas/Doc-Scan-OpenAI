@@ -13,13 +13,13 @@ To use DocScanner, please follow the steps below:
    ```
 2. Update 'env' file with your OpenAI Key
    
-3. Add OpenAI to your machine enviroment variable
-   Step 1: Open CMD prompt
-   Step 2: Run the following in the cmd prompt, replacing <yourkey> with your API key:
+3. Add OpenAI Key to your machine's enviroment variable
+   -Step 1: Open CMD prompt
+   -Step 2: Run the following in the cmd prompt, replacing <yourkey> with your API key:
    ```bash
    setx OPENAI_API_KEY “<yourkey>”
    ```
-   Step 3: To validate the OpenAI Key on your machine, use the cmd command:
+   -Step 3: To validate the OpenAI Key on your machine, use the cmd command:
    ```bash
    echo %OPENAI_API_KEY%
    ```
