@@ -19,7 +19,7 @@ def add_background():
           f"""
           <style>
           .stApp {{
-              background-image: url("https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+              background-image: url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
               background-attachment: fixed;
               background-size: cover;
           }}
@@ -37,23 +37,22 @@ def main():
     # Background Image
     add_background() 
 
-    # Hiding Steamlit Logo and Settings
+    #Hiding Steamlit Logo and Settings
     hide_streamlit_style = """
             <style>
-            #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
     
     # Title
-    st.header("**Document Scanner - Personalized ChatBot** 📖")
+    st.markdown("<h2>\nDocument Scanner - Personalized ChatBot 📖</h2>", unsafe_allow_html = True)
     
     #Example Color Text
     #st.markdown("This text is <span style='color:#ff6600'>colored pink</span>", unsafe_allow_html=True)
     
     # Upload File Prompt
-    pdf_list = st.file_uploader("Please upload your PDF files", type="pdf", accept_multiple_files=True) 
+    pdf_list = st.file_uploader(":orange[**Please upload your PDF files**]", type="pdf", accept_multiple_files=True) 
     
     # Extract the text from each PDF
     if pdf_list:
@@ -91,7 +90,7 @@ def main():
         r=random.randint(30,60)
         for a in range(r):
           time.sleep(0.1)
-          progress_bar.progress(a+1,text="Operation in progress. Please wait.")
+          progress_bar.progress(a+1,text=":orange[**Operation in progress ⏳**]")
         
         #Gather Response with Token Cost
         with get_openai_callback() as cb:
@@ -99,8 +98,8 @@ def main():
 
         for i in range(r,100):
           time.sleep(0.01)
-          progress_bar.progress(i+1,text="Operation in progress. Please wait.")
-        progress_bar.progress(100, text="Operation Success!")
+          progress_bar.progress(i+1,text=":orange[**Operation in progress ⏳**]")
+        progress_bar.progress(100, text=":orange[**Operation Success ✅**]")
 
         #Token Cost
         st.write(cb)
