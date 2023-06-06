@@ -12,8 +12,18 @@ To use DocScanner, please follow the steps below:
    git clone repository_url](https://github.com/ShivamVyas/Doc-Scan-OpenAI.git
    ```
 2. Update 'env' file with your OpenAI Key
-
-3. Install the required dependencies by running the following command:
+   
+3. Add OpenAI to your machine enviroment variable
+   Step 1: Open CMD prompt
+   Step 2: Run the following in the cmd prompt, replacing <yourkey> with your API key:
+   ```bash
+      setx OPENAI_API_KEY “<yourkey>”
+   ```
+   Step 3: To validate the OpenAI Key on your machine, use the cmd command:
+   ```bash
+     echo %OPENAI_API_KEY%
+   ```
+4. Install the required dependencies by running the following command:
 
    ```bash
    pip install -r requirements.txt
@@ -21,7 +31,7 @@ To use DocScanner, please follow the steps below:
 
    This command will install all the necessary Python packages specified in the `requirements.txt` file.
 
-4. After the installation is complete, you are ready to start using DocScanner!
+5. After the installation is complete, you are ready to start using DocScanner!
 
 ## Usage
 
