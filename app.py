@@ -1,7 +1,11 @@
+# UI Library
 import streamlit as st
 
+# Time and Random library for operation progress bar
 import time
 import random
+
+# URL Image Extractions
 import urllib.request
 from PIL import Image
 
@@ -12,7 +16,7 @@ from PyPDF2 import PdfReader
 # Environment Variable 
 from dotenv import load_dotenv
 
-# Open AI And Facebook's Research 
+# Open AI And Facebook's Similarity Search Libraries
 from langchain.llms import OpenAI
 from langchain.vectorstores import FAISS
 from langchain.callbacks import get_openai_callback
