@@ -1,17 +1,25 @@
 import streamlit as st
-import docx2txt
+
 import time
 import random
 import urllib.request
 from PIL import Image
-from dotenv import load_dotenv
+
+# Doc Readers
+import docx2txt
 from PyPDF2 import PdfReader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.chains.question_answering import load_qa_chain
+
+# Environment Variable 
+from dotenv import load_dotenv
+
+# Open AI And Facebook's Research 
 from langchain.llms import OpenAI
+from langchain.vectorstores import FAISS
 from langchain.callbacks import get_openai_callback
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.chains.question_answering import load_qa_chain
+
 
 
 # Adding Background Image and Removing Watermark
@@ -68,15 +76,17 @@ def main():
       text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=200, length_function=len)
       chunks = text_splitter.split_text(text)
       
+      # Takes environment variables from env file
       load_dotenv()
-      # Using Facebook's library creating embeddings
+
+      # Creating embeddings and using it with Facebook's FAISS database
       embeddings = OpenAIEmbeddings()
-      knowledge_base = FAISS.from_texts(chunks, embeddings)
+      faiss = FAISS.from_texts(chunks, embeddings)
       
       # Run OPENAI and Show User Input
       user_question = st.text_input(":orange[**How can I help you?**]")
       if user_question:
-        docs = knowledge_base.similarity_search(user_question)
+        docs = faiss.similarity_search(user_question)
         
         llm = OpenAI()
         chain = load_qa_chain(llm, chain_type="stuff")
