@@ -19,7 +19,7 @@ def add_background():
           f"""
           <style>
           .stApp {{
-              background-image: url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+              background-image: url("https://i.imgur.com/5io8Mnn.jpeg");
               background-attachment: fixed;
               background-size: cover;
           }}
