@@ -89,13 +89,14 @@ def main():
       
       # Run OPENAI and Show User Input
       user_question = st.text_input(":orange[**How can I help you?**]")
+
       if user_question:
         docs = faiss.similarity_search(user_question)
         
         llm = OpenAI()
         #Chain type can be changed to map_reduce for large files
         chain = load_qa_chain(llm, chain_type="stuff")
-        
+
         
         # Progress bar not configured with threading (Just for show)
         progress_bar = st.progress(0);
