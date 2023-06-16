@@ -69,6 +69,7 @@ def main():
     if file_list:
       text = ""
       for file in file_list:
+        text += file.name
         if ".pdf" in file.name:
           pdf_reader = PdfReader(file)
           for page in pdf_reader.pages:
